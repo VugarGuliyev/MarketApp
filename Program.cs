@@ -10,9 +10,7 @@ namespace MarketApp
     {
         static void Main(string[] args)
         {
-            MethodClass m = new MethodClass();
-
-            m.AddNewProduct();
+            
 
 
             Console.Read();

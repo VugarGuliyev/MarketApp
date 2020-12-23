@@ -24,18 +24,18 @@ namespace MarketApp
         // menimsetmek uchun istifade olunub. Yalniz bu class-daki metodlarda
         // istifade edildikleri uchun xususi access modifier qeyd olunmayib.
 
+        StringBuilder input = new StringBuilder();
         StringBuilder oldCodeInput = new StringBuilder();
         StringBuilder newCodeInput = new StringBuilder();
         StringBuilder minPriceInput = new StringBuilder();
         StringBuilder maxPriceInput = new StringBuilder();
-        StringBuilder userInput = new StringBuilder();
+
+        double price;
+        int count;
+        bool category = false;
 
         double minPrice;
         double maxPrice;
-        double productPrice;
-        int productCount;
-        bool myBool = false;
-        bool check = false;
 
         // Ashagidaki metodlar mehsul ve satish axtarish metodlarinda Predictable type
         // callback metodlar kimi istifade olunub.
@@ -45,7 +45,7 @@ namespace MarketApp
             return product.Code == oldCodeInput.ToString();
         }
 
-        public bool NewCode(Product product)
+        public bool AmendProduct(Product product)
         {
             return product.Code == newCodeInput.ToString();
         }
