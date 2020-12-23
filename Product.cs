@@ -22,7 +22,7 @@ namespace MarketApp
 
         public override string ToString()
         {
-            return $"Ad: {Name} | Qiymet: {Price} | Say: {Count} | Kod: {Code} | Kateqoriya: {Category}";
+            return $"Kod: {Code} | Ad: {Name} | Qiymet: {Price} | Say: {Count} | Kateqoriya: {Category}";
         }
     }
 }
