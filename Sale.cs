@@ -10,15 +10,19 @@ namespace MarketApp
     {
         private static int _id = 0;
         public readonly int ID;
-        public DateTime SaleDate { get; set; }
+        public DateTime Date { get; set; }
         public double TotalAmount { get; set; }
-
         List<SaleItem> saleItems = new List<SaleItem>();
 
         public Sale()
         {
             ID = ++_id;
             TotalAmount = 0;
+        }
+
+        public override string ToString()
+        {
+            return $"Nomre: {ID} | Tarix: {Date.ToString("MM/dd/yyyy")} | Mebleg: {TotalAmount}";
         }
     }
 }

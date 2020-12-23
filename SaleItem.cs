@@ -8,17 +8,13 @@ namespace MarketApp
 {
     class SaleItem
     {
-        private static int _itemIndex = 0;
-        public readonly int ItemIndex;
         public Product Product { get; set; }
         public int Count { get; set; }
 
-        public SaleItem()
-        {
-            ItemIndex = ++_itemIndex;
-        }
-
-        public SaleItem(Product product, int count) : this()
+        // Satish yaradilanda Sale Class-inin ichindeki SaleItem tipinden olan List-e birbasha bu constructorla yeni
+        // SaleItem-lar gonderilir. Istifadechinin daxil etdiyi mehsul kodu ve sayi arqument kimi bu constructorda
+        // istifade olunur.
+        public SaleItem(Product product, int count)
         {
             Product = product;
             Count = count;

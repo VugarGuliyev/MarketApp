@@ -12,7 +12,7 @@ namespace MarketApp
     // Class partial olaraq 3 hisseye bolunub. Bu hisse satish ve mehsul siyahilari,
     // metodlarda istifade etmek uchun yaradilan deyishenler ve Predictable type-a uygun metodlari ehtiva edir.
 
-    partial class MethodClass : IMarketable
+    partial class Process : IMarketable
     {
         // Satish ve mehsul siyahilari
 

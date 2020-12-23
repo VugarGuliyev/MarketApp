@@ -8,7 +8,7 @@ namespace MarketApp
 {
     // Bu hisse mehsullar uzerinde aparilacaq emeliyyatlara uygun metodlari ehtiva edir.
 
-    partial class MethodClass : IMarketable
+    partial class Process : IMarketable
     {
         public void AddNewProduct()
         {
@@ -32,6 +32,12 @@ namespace MarketApp
                 {
                     Console.WriteLine("Bu koda uygun mehsul artiq movcuddur.");
                     return;
+                }
+
+                if (oldCodeInput.ToString() == "0")
+                {
+                    Console.WriteLine("Mehsul kodu 0 ola bilmez.");
+                    continue;
                 }
 
                 if (!String.IsNullOrEmpty(oldCodeInput.ToString()) &&
@@ -179,6 +185,12 @@ namespace MarketApp
                 {
                     Console.WriteLine("Bu koda uygun mehsul artiq movcuddur.");
                     return;
+                }
+
+                if (newCodeInput.ToString() == "0")
+                {
+                    Console.WriteLine("Mehsul kodu 0 ola bilmez.");
+                    continue;
                 }
 
                 if (!String.IsNullOrEmpty(newCodeInput.ToString()) &&
