@@ -49,5 +49,56 @@ namespace MarketApp
         {
             return product.Code == newCodeInput.ToString();
         }
+
+        // Ashagidaki metodlar benzer if statement ve switch case-lerde istifade etmek uchun yaradilib.
+
+        public bool InputCheck(string item)
+        {
+            return String.IsNullOrEmpty(item) || String.IsNullOrWhiteSpace(item);
+        }
+
+        public bool PriceCheck(string item)
+        {
+            return !double.TryParse(item, out price) || price <= 0;
+        }
+
+        public bool CountCheck(string item)
+        {
+            return item.Contains('.') || !int.TryParse(item, out count) || count <= 0;
+        }
+
+        public void CategoryCheck(string item, Predicate<Product> method)
+        {
+            switch (item)
+            {
+                case "1":
+                    products.Find(method).Category = Category.Shirniyyat;
+                    category = true;
+                    break;
+                case "2":
+                    products.Find(method).Category = Category.Et_Mehsullari;
+                    category = true;
+                    break;
+                case "3":
+                    products.Find(method).Category = Category.Sud_Mehsullari;
+                    category = true;
+                    break;
+                case "4":
+                    products.Find(method).Category = Category.Meishet_Avadanligi;
+                    category = true;
+                    break;
+                case "5":
+                    products.Find(method).Category = Category.Ichki;
+                    category = true;
+                    break;
+                case "6":
+                    products.Find(method).Category = Category.Meyve_Terevez;
+                    category = true;
+                    break;
+                default:
+                    Console.WriteLine("Duzgun kateqoriya indeksi daxil edin.");
+                    break;
+            }
+        }
     }
 }

@@ -10,8 +10,11 @@ namespace MarketApp
     {
         static void Main(string[] args)
         {
+            Process process = new Process();
 
-           
+            process.AddNewProduct();
+            process.ChangeProductDetails();
+
 
             Console.Read();
         }
