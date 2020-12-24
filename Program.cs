@@ -17,7 +17,6 @@ namespace MarketApp
 
             while (!bool1)
             {
-                Console.Clear();
                 Console.WriteLine("*** MARKET IDAREETME SISTEMI ***");
                 Console.Write(Environment.NewLine);
                 Console.WriteLine("1 - Mehsul emeliyyatlari");
@@ -157,14 +156,12 @@ namespace MarketApp
                         bool1 = true;
                         break;
                     default:
+                        Console.Clear();
                         Console.WriteLine("Duzgun sechim edin.");
                         Console.Write(Environment.NewLine);
                         break;
                 }
             }
-
-
-            Console.Read();
         }
     }
 }
