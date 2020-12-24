@@ -20,5 +20,10 @@ namespace MarketApp
             Product = product;
             Count = count;
         }
+
+        public override string ToString()
+        {
+            return $"Mehsul: {Product} | Say: {Count}";
+        }
     }
 }

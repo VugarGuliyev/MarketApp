@@ -23,6 +23,6 @@ namespace MarketApp
         void ShowDateBasedSales();
         void ShowAmountBasedSales();
         void ExactDateSale();
-        void RemoveIDBasedSale();
+        void ShowIDBasedSale();
     }
 }

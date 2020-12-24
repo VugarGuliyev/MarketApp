@@ -44,6 +44,12 @@ namespace MarketApp
         double minPrice;
         double maxPrice;
 
+        // Ashagidaki DateTime tip deyishenler tarix araligina gore satishlari
+        // gosterende istifade etmek uchun yaradilib.
+
+        DateTime date1 = new DateTime();
+        DateTime date2 = new DateTime();
+
         #endregion
 
         #region Metodlar
@@ -112,9 +118,9 @@ namespace MarketApp
             return !double.TryParse(item, out price) || price <= 0;
         }
 
-        public bool CountCheck(string item)
+        public bool CountCheck(string str, int n)
         {
-            return item.Contains('.') || !int.TryParse(item, out count) || count <= 0;
+            return str.Contains('.') || !int.TryParse(str, out n) || n <= 0;
         }
 
         public void CategoryCheck(string item, Predicate<Product> method)

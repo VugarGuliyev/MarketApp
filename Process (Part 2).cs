@@ -14,7 +14,8 @@ namespace MarketApp
         {
             products.Add(new Product());
             Console.WriteLine("Emeliyyati dayandirmaq uchun mehsul koduna # daxil ede bilersiniz.");
-            Console.WriteLine(Environment.NewLine + "Yeni mehsulun detallarini daxil edin.");
+            Console.Write(Environment.NewLine);
+            Console.WriteLine("Yeni mehsulun detallarini daxil edin.");
 
             // Ashagidaki while loop-lar mehsul detallarinin daxil edilmesi uchun istifade olunub.
             // Melumatlar duzgun yazilmayanda bildirish edilir ve duzgun daxil edilmesi teleb olunur.
@@ -27,7 +28,9 @@ namespace MarketApp
 
                 if (oldCodeInput.ToString() == "#")
                 {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    Console.Clear();
+                    Console.WriteLine("Emeliyyat dayandirildi.");
+                    Console.Write(Environment.NewLine);
                     products.Remove(products[products.Count - 1]);
                     return;
                 }
@@ -95,27 +98,31 @@ namespace MarketApp
                 Console.Write("Say: ");
                 NewInput(input);
 
-                if (CountCheck(input.ToString()))
+                if (CountCheck(input.ToString(), count))
                 {
                     Console.WriteLine("Duzgun say daxil edin.");
                     continue;
                 }
 
                 products.Find(FindProduct).Count = count;
-                Console.WriteLine(Environment.NewLine + "Mehsul uchun ashagidaki kateqoriyalardan birini sechin.");
+                Console.Write(Environment.NewLine);
+                Console.WriteLine("Mehsul uchun ashagidaki kateqoriyalardan birini sechin.");
                 ShowCategoryList();
                 break;
             }
 
             while (!category)
             {
+                Console.Write(Environment.NewLine);
                 Console.Write("Kateqoriya indeksi: ");
                 NewInput(input);
                 CategoryCheck(input.ToString(), FindProduct);
             }
 
-            Console.WriteLine(Environment.NewLine + "Yeni mehsul elave edildi.");
+            Console.Clear();
+            Console.WriteLine("Yeni mehsul elave edildi.");
             Console.WriteLine(products.Find(FindProduct));
+            Console.Write(Environment.NewLine);
             category = false;
         }
 
@@ -126,11 +133,12 @@ namespace MarketApp
             if (products.Count == 0)
             {
                 Console.WriteLine("Mehsul siyahisi boshdur.");
+                Console.Write(Environment.NewLine);
                 return;
             }
 
             Console.WriteLine("Emeliyyati dayandirmaq uchun mehsul koduna # daxil ede bilersiniz.");
-            Console.WriteLine(Environment.NewLine + "Duzelish etmek istediyiniz mehsulun kodunu daxil edin.");
+            Console.WriteLine("Duzelish etmek istediyiniz mehsulun kodunu daxil edin.");
 
             // Mehsulun koduna gore axtarish edilir. Koda uygun mehsul movcud deyilse
             // sistemden chixilir. Koda uygun mehsul movcuddursa deyishiklikler edilir.
@@ -142,7 +150,9 @@ namespace MarketApp
 
                 if (oldCodeInput.ToString() == "#")
                 {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    Console.Clear();
+                    Console.WriteLine("Emeliyyat dayandirildi.");
+                    Console.Write(Environment.NewLine);
                     return;
                 }
 
@@ -226,27 +236,31 @@ namespace MarketApp
                 Console.Write("Mehsulun yeni sayi: ");
                 NewInput(input);
 
-                if (CountCheck(input.ToString()))
+                if (CountCheck(input.ToString(), count))
                 {
                     Console.WriteLine("Duzgun say daxil edin.");
                     continue;
                 }
 
                 products.Find(AmendProduct).Count = count;
-                Console.WriteLine(Environment.NewLine + "Mehsul uchun yeni kateqoriya sechin.");
+                Console.Write(Environment.NewLine);
+                Console.WriteLine("Mehsul uchun yeni kateqoriya sechin.");
                 ShowCategoryList();
                 break;
             }
 
             while (!category)
             {
+                Console.Write(Environment.NewLine);
                 Console.Write("Kateqoriya indeksi: ");
                 NewInput(input);
                 CategoryCheck(input.ToString(), AmendProduct);
             }
 
-            Console.WriteLine(Environment.NewLine + "Mehsul detallari deyishdirildi.");
+            Console.Clear();
+            Console.WriteLine("Mehsul detallari deyishdirildi.");
             Console.WriteLine(products.Find(AmendProduct));
+            Console.Write(Environment.NewLine);
             category = false;
         }
 
@@ -255,11 +269,13 @@ namespace MarketApp
             if (products.Count == 0)
             {
                 Console.WriteLine("Mehsul siyahisi boshdur.");
+                Console.Write(Environment.NewLine);
                 return;
             }
 
             Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
-            Console.WriteLine(Environment.NewLine + "Silmek istediyiniz mehsulun kodunu daxil edin.");
+            Console.Write(Environment.NewLine);
+            Console.WriteLine("Silmek istediyiniz mehsulun kodunu daxil edin.");
             
             while (true)
             {
@@ -268,7 +284,9 @@ namespace MarketApp
 
                 if (oldCodeInput.ToString() == "#")
                 {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    Console.Clear();
+                    Console.WriteLine("Emeliyyat dayandirildi.");
+                    Console.Write(Environment.NewLine);
                     return;
                 }
 
@@ -281,7 +299,9 @@ namespace MarketApp
                 // Kodlar unikal oldugu uchun ashagidaki metod koda uygun tapilan yegane mehsulu silir.
 
                 products.Remove(products.Find(FindProduct));
-                Console.WriteLine(Environment.NewLine + "Mehsul silindi.");
+                Console.Clear();
+                Console.WriteLine("Mehsul silindi.");
+                Console.Write(Environment.NewLine);
                 return;
             }
         }
@@ -291,11 +311,13 @@ namespace MarketApp
             if (products.Count == 0)
             {
                 Console.WriteLine("Mehsul siyahisi boshdur.");
+                Console.Write(Environment.NewLine);
                 return;
             }
 
-            Console.WriteLine("Umumi mehsul siyahisi:" + Environment.NewLine);
+            Console.WriteLine("Umumi mehsul siyahisi:");
             ShowProductList();
+            Console.Write(Environment.NewLine);
         }
 
         public void ShowCategoryBasedProducts()
@@ -303,12 +325,16 @@ namespace MarketApp
             if (products.Count == 0)
             {
                 Console.WriteLine("Mehsul siyahisi boshdur.");
+                Console.Write(Environment.NewLine);
                 return;
             }
 
             Console.WriteLine("Emeliyyati dayandirmaq uchun # daxil ede bilersiniz.");
-            Console.WriteLine(Environment.NewLine + "Kateqoriya indeksini daxil edin." + Environment.NewLine);
+            Console.Write(Environment.NewLine);
+            Console.WriteLine("Kateqoriya indeksini daxil edin.");
+            Console.Write(Environment.NewLine);
             ShowCategoryList();
+            Console.Write(Environment.NewLine);
 
             while (true)
             {
@@ -318,7 +344,9 @@ namespace MarketApp
                 switch (input.ToString())
                 {
                     case "#":
-                        Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                        Console.Clear();
+                        Console.WriteLine("Emeliyyat dayandirildi.");
+                        Console.Write(Environment.NewLine);
                         return;
                     case "1":
                         // Ashagidaki yoxlanish muvafiq kateqoriyaya uygun mehsullarin movcud
@@ -330,11 +358,13 @@ namespace MarketApp
                             break;
                         }
 
-                        Console.WriteLine(Environment.NewLine + "Shirniyyat kateqoriyasi:");
+                        Console.Clear();
+                        Console.WriteLine("Shirniyyat kateqoriyasi:");
 
                         foreach (Product item in products.FindAll(x => x.Category == Category.Shirniyyat))
                             Console.WriteLine(item);
 
+                        Console.Write(Environment.NewLine);
                         return;
                     case "2":
                         if (products.Find(x => x.Category == Category.Et_Mehsullari) == null)
@@ -343,11 +373,13 @@ namespace MarketApp
                             break;
                         }
 
-                        Console.WriteLine(Environment.NewLine + "Et_Mehsullari kateqoriyasi:");
+                        Console.Clear();
+                        Console.WriteLine("Et_Mehsullari kateqoriyasi:");
 
                         foreach (Product item in products.FindAll(x => x.Category == Category.Et_Mehsullari))
                             Console.WriteLine(item);
 
+                        Console.Write(Environment.NewLine);
                         return;
                     case "3":
                         if (products.Find(x => x.Category == Category.Sud_Mehsullari) == null)
@@ -356,11 +388,13 @@ namespace MarketApp
                             break;
                         }
 
-                        Console.WriteLine(Environment.NewLine + "Sud_Mehsullari kateqoriyasi:");
+                        Console.Clear();
+                        Console.WriteLine("Sud_Mehsullari kateqoriyasi:");
 
                         foreach (Product item in products.FindAll(x => x.Category == Category.Sud_Mehsullari))
                             Console.WriteLine(item);
 
+                        Console.Write(Environment.NewLine);
                         return;
                     case "4":
                         if (products.Find(x => x.Category == Category.Meishet_Avadanligi) == null)
@@ -369,11 +403,13 @@ namespace MarketApp
                             break;
                         }
 
-                        Console.WriteLine(Environment.NewLine + "Meishet_Avadanligi kateqoriyasi:");
+                        Console.Clear();
+                        Console.WriteLine("Meishet_Avadanligi kateqoriyasi:");
 
                         foreach (Product item in products.FindAll(x => x.Category == Category.Meishet_Avadanligi))
                             Console.WriteLine(item);
 
+                        Console.Write(Environment.NewLine);
                         return;
                     case "5":
                         if (products.Find(x => x.Category == Category.Ichki) == null)
@@ -382,11 +418,13 @@ namespace MarketApp
                             break;
                         }
 
-                        Console.WriteLine(Environment.NewLine + "Ichki kateqoriyasi:");
+                        Console.Clear();
+                        Console.WriteLine("Ichki kateqoriyasi:");
 
                         foreach (Product item in products.FindAll(x => x.Category == Category.Ichki))
                             Console.WriteLine(item);
 
+                        Console.Write(Environment.NewLine);
                         return;
                     case "6":
                         if (products.Find(x => x.Category == Category.Meyve_Terevez) == null)
@@ -395,11 +433,13 @@ namespace MarketApp
                             break;
                         }
 
-                        Console.WriteLine(Environment.NewLine + "Meyve_Terevez kateqoriyasi:");
+                        Console.Clear();
+                        Console.WriteLine("Meyve_Terevez kateqoriyasi:");
 
                         foreach (Product item in products.FindAll(x => x.Category == Category.Meyve_Terevez))
                             Console.WriteLine(item);
 
+                        Console.Write(Environment.NewLine);
                         return;
                     default:
                         Console.WriteLine("Duzgun kateqoriya indeksi daxil edin.");
@@ -413,11 +453,13 @@ namespace MarketApp
             if (products.Count == 0)
             {
                 Console.WriteLine("Mehsul siyahisi boshdur.");
+                Console.Write(Environment.NewLine);
                 return;
             }
 
             Console.WriteLine("Emeliyyati dayandirmaq uchun # daxil ede bilersiniz.");
-            Console.WriteLine(Environment.NewLine + "Qiymet araligini daxil edin.");
+            Console.Write(Environment.NewLine);
+            Console.WriteLine("Qiymet araligini daxil edin.");
 
             while (true)
             {
@@ -426,7 +468,9 @@ namespace MarketApp
 
                 if (minPriceInput.ToString() == "#")
                 {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    Console.Clear();
+                    Console.WriteLine("Emeliyyat dayandirildi.");
+                    Console.Write(Environment.NewLine);
                     return;
                 }
 
@@ -435,7 +479,9 @@ namespace MarketApp
 
                 if (maxPriceInput.ToString() == "#")
                 {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    Console.Clear();
+                    Console.WriteLine("Emeliyyat dayandirildi.");
+                    Console.Write(Environment.NewLine);
                     return;
                 }
 
@@ -455,11 +501,13 @@ namespace MarketApp
                     continue;
                 }
 
-                Console.WriteLine(Environment.NewLine + "Daxil etdiyiniz qiymet araligina uygun mehsullar:");
+                Console.Clear();
+                Console.WriteLine("Daxil etdiyiniz qiymet araligina uygun mehsullar:");
 
                 foreach (Product item in products.FindAll(x => x.Price >= minPrice && x.Price <= maxPrice))
                     Console.WriteLine(item);
 
+                Console.Write(Environment.NewLine);
                 return;
             }       
         }
@@ -469,11 +517,13 @@ namespace MarketApp
             if (products.Count == 0)
             {
                 Console.WriteLine("Mehsul siyahisi boshdur.");
+                Console.Write(Environment.NewLine);
                 return;
             }
 
             Console.WriteLine("Emeliyyati dayandirmaq uchun # daxil ede bilersiniz.");
-            Console.WriteLine(Environment.NewLine + "Mehsulun adini daxil edin.");
+            Console.Write(Environment.NewLine);
+            Console.WriteLine("Mehsulun adini daxil edin.");
 
             while (true)
             {
@@ -482,7 +532,9 @@ namespace MarketApp
 
                 if (input.ToString() == "#")
                 {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    Console.Clear();
+                    Console.WriteLine("Emeliyyat dayandirildi.");
+                    Console.Write(Environment.NewLine);
                     return;
                 }
 
@@ -498,11 +550,13 @@ namespace MarketApp
                     continue;
                 }
 
-                Console.WriteLine(Environment.NewLine + "Daxil etdiyiniz ada uygun gelen mehsullar ashagidakilardir:");
+                Console.Clear();
+                Console.WriteLine("Daxil etdiyiniz ada uygun gelen mehsullar ashagidakilardir:");
 
                 foreach (Product item in products.FindAll(x => x.Name.ToLower() == input.ToString().ToLower()))
                     Console.WriteLine(item);
 
+                Console.Write(Environment.NewLine);
                 return;
             }
         }
