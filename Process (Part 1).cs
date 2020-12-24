@@ -118,9 +118,9 @@ namespace MarketApp
             return !double.TryParse(item, out price) || price <= 0;
         }
 
-        public bool CountCheck(string str, int n)
+        public bool CountCheck(string str)
         {
-            return str.Contains('.') || !int.TryParse(str, out n) || n <= 0;
+            return str.Contains('.') || !int.TryParse(str, out count) || count <= 0;
         }
 
         public void CategoryCheck(string item, Predicate<Product> method)

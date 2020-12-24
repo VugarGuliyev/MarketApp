@@ -98,7 +98,7 @@ namespace MarketApp
                 Console.Write("Say: ");
                 NewInput(input);
 
-                if (CountCheck(input.ToString(), count))
+                if (CountCheck(input.ToString()))
                 {
                     Console.WriteLine("Duzgun say daxil edin.");
                     continue;
@@ -236,7 +236,7 @@ namespace MarketApp
                 Console.Write("Mehsulun yeni sayi: ");
                 NewInput(input);
 
-                if (CountCheck(input.ToString(), count))
+                if (CountCheck(input.ToString()))
                 {
                     Console.WriteLine("Duzgun say daxil edin.");
                     continue;

@@ -126,7 +126,7 @@ namespace MarketApp
 
                     // Her mehsuldan minimum 1 eded elave edilmelidir.
 
-                    if (CountCheck(input.ToString(), count))
+                    if (CountCheck(input.ToString()))
                     {
                         Console.WriteLine("Musbet tam eded daxil edin.");
                         continue;
@@ -183,7 +183,7 @@ namespace MarketApp
                     return;
                 }
 
-                if (CountCheck(input.ToString(), saleID))
+                if (input.ToString().Contains('.') || !int.TryParse(input.ToString(), out saleID) || saleID <= 0)
                 {
                     Console.WriteLine("Nomre musbet tam eded olmalidir.");
                     continue;
@@ -225,7 +225,7 @@ namespace MarketApp
                 Console.Write("Miqdar: ");
                 NewInput(input);
 
-                if (CountCheck(input.ToString(), count))
+                if (CountCheck(input.ToString()))
                 {
                     Console.WriteLine("Musbet tam eded daxil edin.");
                     continue;
@@ -284,7 +284,7 @@ namespace MarketApp
                     return;
                 }
 
-                if (CountCheck(input.ToString(), saleID))
+                if (input.ToString().Contains('.') || !int.TryParse(input.ToString(), out saleID) || saleID <= 0)
                 {
                     Console.WriteLine("Musbet tam eded daxil edin.");
                     continue;
@@ -499,7 +499,7 @@ namespace MarketApp
                     return;
                 }
 
-                if (CountCheck(input.ToString(), saleID))
+                if (input.ToString().Contains('.') || !int.TryParse(input.ToString(), out saleID) || saleID <= 0)
                 {
                     Console.WriteLine("Nomre musbet tam eded olmalidir.");
                     continue;
