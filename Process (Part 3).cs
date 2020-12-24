@@ -12,18 +12,16 @@ namespace MarketApp
     {
         public void AddNewSale()
         {
-            if (products.Count == 0)
+            if (products.Count == 0 || !products.Exists(x => x.Count != 0))
             {
                 Console.WriteLine("Mehsul siyahisi boshdur.");
                 Console.Write(Environment.NewLine);
                 return;
             }
 
-            sales.Add(new Sale());
             Console.WriteLine("Emeliyyati dayandirmaq uchun satish tarixine # daxil ede bilersiniz.");
             Console.Write(Environment.NewLine);
             Console.WriteLine("Yeni satishin tarixini ve mehsul kodlarini daxil edin.");
-            saleID = sales[sales.Count - 1].ID;
 
             while (true)
             {
@@ -35,13 +33,13 @@ namespace MarketApp
                     Console.Clear();
                     Console.WriteLine("Emeliyyat dayandirildi");
                     Console.Write(Environment.NewLine);
-                    sales.Remove(sales[sales.Count - 1]);
                     return;
                 }
 
                 try
                 {
-                    sales.Find(CheckID).Date = DateTime.Parse(input.ToString());
+                    sales.Add(new Sale(DateTime.Parse(input.ToString())));
+                    saleID = sales[sales.Count - 1].ID;
                     break;
                 }
                 catch (Exception)

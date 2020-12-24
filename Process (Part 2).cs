@@ -280,7 +280,7 @@ namespace MarketApp
                 return;
             }
 
-            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun mehsul koduna # daxil ede bilersiniz.");
             Console.Write(Environment.NewLine);
             Console.WriteLine("Silmek istediyiniz mehsulun kodunu daxil edin.");
             

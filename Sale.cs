@@ -21,6 +21,11 @@ namespace MarketApp
             TotalAmount = 0;
         }
 
+        public Sale(DateTime date): this()
+        {
+            Date = date;
+        }
+
         public override string ToString()
         {
             return $"Nomre: {ID} | Tarix: {Date.ToString("MM/dd/yyyy")} | Cheshid sayi: {list.Count} | Mebleg: {TotalAmount} AZN";
