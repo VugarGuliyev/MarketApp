@@ -12,8 +12,14 @@ namespace MarketApp
         {
             Process process = new Process();
 
-
             process.AddNewProduct();
+            process.AddNewProduct();
+            process.AddNewProduct();
+
+            process.AddNewSale();
+
+            process.ShowAllProducts();
+
 
             Console.Read();
         }

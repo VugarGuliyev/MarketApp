@@ -38,6 +38,7 @@ namespace MarketApp
 
         double price;
         int count;
+        int saleID;
         bool category = false;
 
         double minPrice;
@@ -47,8 +48,8 @@ namespace MarketApp
 
         #region Metodlar
 
-        // FindProduct ve AmendProduct metodlari mehsul ve satish axtarish metodlarinda
-        // Predictable type callback metodlar kimi istifade olunub.
+        // FindProduct, AmendProduct ve CheckID metodlari mehsul ve satish axtarish
+        // metodlarinda Predictable type callback metodlar kimi istifade olunub.
 
         public bool FindProduct(Product product)
         {
@@ -58,6 +59,11 @@ namespace MarketApp
         public bool AmendProduct(Product product)
         {
             return product.Code == newCodeInput.ToString();
+        }
+
+        public bool CheckID(Sale sale)
+        {
+            return sale.ID == saleID;
         }
 
         // NewInput metodu StringBuilder-leri temizleyib onlara
@@ -115,9 +121,6 @@ namespace MarketApp
         {
             switch (item)
             {
-                case "#":
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
-                    return;
                 case "1":
                     products.Find(method).Category = Category.Shirniyyat;
                     category = true;

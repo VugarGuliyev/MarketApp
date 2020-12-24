@@ -13,7 +13,7 @@ namespace MarketApp
         public void AddNewProduct()
         {
             products.Add(new Product());
-            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun mehsul koduna # daxil ede bilersiniz.");
             Console.WriteLine(Environment.NewLine + "Yeni mehsulun detallarini daxil edin.");
 
             // Ashagidaki while loop-lar mehsul detallarinin daxil edilmesi uchun istifade olunub.
@@ -28,6 +28,7 @@ namespace MarketApp
                 if (oldCodeInput.ToString() == "#")
                 {
                     Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    products.Remove(products[products.Count - 1]);
                     return;
                 }
 
@@ -58,15 +59,15 @@ namespace MarketApp
                 Console.Write("Ad: ");
                 NewInput(input);
 
-                if (input.ToString() == "#")
-                {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
-                    return;
-                }
-
                 if (InputCheck(input.ToString()))
                 {
                     Console.WriteLine("Duzgun ad daxil edin.");
+                    continue;
+                }
+
+                if (input.ToString() == "#")
+                {
+                    Console.WriteLine("Mehsul adi # ile bashlaya bilmez. Bashqa ad daxil edin.");
                     continue;
                 }
 
@@ -78,12 +79,6 @@ namespace MarketApp
             {
                 Console.Write("Qiymet (AZN): ");
                 NewInput(input);
-
-                if (input.ToString() == "#")
-                {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
-                    return;
-                }
 
                 if (PriceCheck(input.ToString()))
                 {
@@ -99,12 +94,6 @@ namespace MarketApp
             {
                 Console.Write("Say: ");
                 NewInput(input);
-
-                if (input.ToString() == "#")
-                {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
-                    return;
-                }
 
                 if (CountCheck(input.ToString()))
                 {
@@ -140,7 +129,7 @@ namespace MarketApp
                 return;
             }
 
-            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun mehsul koduna # daxil ede bilersiniz.");
             Console.WriteLine(Environment.NewLine + "Duzelish etmek istediyiniz mehsulun kodunu daxil edin.");
 
             // Mehsulun koduna gore axtarish edilir. Koda uygun mehsul movcud deyilse
@@ -174,12 +163,6 @@ namespace MarketApp
                 Console.Write("Mehsulun yeni kodu: ");
                 NewInput(newCodeInput);
 
-                if (newCodeInput.ToString() == "#")
-                {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
-                    return;
-                }
-
                 if (newCodeInput.ToString() == "0")
                 {
                     Console.WriteLine("Mehsul kodu 0 ola bilmez. Yeniden cehd edin.");
@@ -207,15 +190,15 @@ namespace MarketApp
                 Console.Write("Mehsulun yeni adi: ");
                 NewInput(input);
 
-                if (input.ToString() == "#")
-                {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
-                    return;
-                }
-
                 if (InputCheck(input.ToString()))
                 {
                     Console.WriteLine("Duzgun ad daxil edin.");
+                    continue;
+                }
+
+                if (input.ToString() == "#")
+                {
+                    Console.WriteLine("Mehsul adi # ile bashlaya bilmez. Bashqa ad daxil edin.");
                     continue;
                 }
 
@@ -227,12 +210,6 @@ namespace MarketApp
             {
                 Console.Write("Mehsulun yeni qiymeti (AZN): ");
                 NewInput(input);
-
-                if (input.ToString() == "#")
-                {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
-                    return;
-                }
 
                 if (PriceCheck(input.ToString()))
                 {
@@ -248,12 +225,6 @@ namespace MarketApp
             {
                 Console.Write("Mehsulun yeni sayi: ");
                 NewInput(input);
-
-                if (input.ToString() == "#")
-                {
-                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
-                    return;
-                }
 
                 if (CountCheck(input.ToString()))
                 {
@@ -335,7 +306,7 @@ namespace MarketApp
                 return;
             }
 
-            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun # daxil ede bilersiniz.");
             Console.WriteLine(Environment.NewLine + "Kateqoriya indeksini daxil edin." + Environment.NewLine);
             ShowCategoryList();
 
@@ -445,7 +416,7 @@ namespace MarketApp
                 return;
             }
 
-            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun # daxil ede bilersiniz.");
             Console.WriteLine(Environment.NewLine + "Qiymet araligini daxil edin.");
 
             while (true)
@@ -501,13 +472,19 @@ namespace MarketApp
                 return;
             }
 
-            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun # daxil ede bilersiniz.");
             Console.WriteLine(Environment.NewLine + "Mehsulun adini daxil edin.");
 
             while (true)
             {
                 Console.Write("Ad: ");
                 NewInput(input);
+
+                if (input.ToString() == "#")
+                {
+                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    return;
+                }
 
                 if (InputCheck(input.ToString()))
                 {

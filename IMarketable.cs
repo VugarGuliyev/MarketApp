@@ -15,5 +15,14 @@ namespace MarketApp
         void ShowCategoryBasedProducts();
         void ShowPriceBasedProducts();
         void ShowNameBasedProducts();
+
+        void AddNewSale();
+        void ReturnProduct();
+        void RemoveSale();
+        void ShowAllSales();
+        void ShowDateBasedSales();
+        void ShowAmountBasedSales();
+        void ExactDateSale();
+        void RemoveIDBasedSale();
     }
 }

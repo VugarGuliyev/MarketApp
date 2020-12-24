@@ -44,8 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMarketable.cs" />
-    <Compile Include="Process %28Part2%29.cs" />
-    <Compile Include="Process %28Part1%29.cs" />
+    <Compile Include="Process %28Part 3%29.cs" />
+    <Compile Include="Process %28Part 2%29.cs" />
+    <Compile Include="Process %28Part 1%29.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

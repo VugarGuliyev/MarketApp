@@ -13,7 +13,7 @@ namespace MarketApp
         public DateTime Date { get; set; }
         public double TotalAmount { get; set; }
 
-        List<SaleItem> saleItems = new List<SaleItem>();
+        public List<SaleItem> list = new List<SaleItem>();
 
         public Sale()
         {
