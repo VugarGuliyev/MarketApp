@@ -58,7 +58,6 @@ namespace MarketApp
             Console.WriteLine("Satishi yekunlashdirmaq uchun mehsul koduna 0 daxil ede bilersiniz.");
             Console.Write(Environment.NewLine);
             ShowAllProducts();
-            Console.Write(Environment.NewLine);
 
             while (true)
             {
@@ -117,11 +116,10 @@ namespace MarketApp
 
                 Console.Write(Environment.NewLine);
                 Console.WriteLine($"Bu mehsulun movcud sayi: {products.Find(FindProduct).Count}");
-                Console.WriteLine("Miqdari daxil edin.");
 
                 while (true)
                 {
-                    Console.Write("Miqdar: ");
+                    Console.Write("Miqdari daxil edin: ");
                     NewInput(input);
 
                     // Her mehsuldan minimum 1 eded elave edilmelidir.
@@ -165,9 +163,7 @@ namespace MarketApp
 
             Console.WriteLine("Emeliyyati dayandirmaq uchun mehsul nomresine # daxil ede bilersiniz.");
             Console.Write(Environment.NewLine);
-            Console.WriteLine("Movcud satish siyahisi:");
             ShowAllSales();
-            Console.Write(Environment.NewLine);
             Console.WriteLine("Qaytarmaq istediyiniz mehsulun yer aldigi satishin nomresini daxil edin.");
 
             while (true)
@@ -199,6 +195,15 @@ namespace MarketApp
             }
 
             Console.Write(Environment.NewLine);
+            Console.WriteLine("Satishin cari veziyyeti:");
+
+            Console.WriteLine(sales.Find(CheckID));
+
+            Console.WriteLine("Terkibindeki mehsul siyahisi:");
+            foreach (SaleItem item in sales.Find(CheckID).list)
+                Console.WriteLine(item);
+
+            Console.Write(Environment.NewLine);
             Console.WriteLine("Qaytarmaq istediyiniz mehsul kodunu daxil edin.");
 
             while (true)
@@ -210,7 +215,6 @@ namespace MarketApp
                 {
                     Console.Write(Environment.NewLine);
                     Console.WriteLine("Satishda bu koda uygun mehsul yoxdur. Bashqa kod daxil edin.");
-                    Console.Write(Environment.NewLine);
                     continue;
                 }
 
@@ -245,17 +249,17 @@ namespace MarketApp
             sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)).Count -= count;
             sales.Find(CheckID).TotalAmount -= sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)).Product.Price * count;
             products.Find(FindProduct).Count += count;
-            Console.Clear();
-            Console.WriteLine("Mehsul qaytarildi.");
-            Console.Write(Environment.NewLine);
-            Console.WriteLine("Satishin cari veziyyeti:");
-            Console.WriteLine(sales.Find(CheckID));
-            Console.Write(Environment.NewLine);
 
             // Mehsul qaytarildiqdan sonra satish item-inin sayi 0-a dushurse hemin item avtomatik silinir.
 
-            if (sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)).Count == 0)
-                sales.Find(CheckID).list.Remove(sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)));
+            sales.Find(CheckID).list.Remove(sales.Find(CheckID).list.Find(x => x.Count == 0));
+
+            Console.Clear();
+            Console.WriteLine("Mehsul qaytarildi.");
+            Console.Write(Environment.NewLine);
+            Console.WriteLine("Satishin yeni detallari:");
+            Console.WriteLine(sales.Find(CheckID));
+            Console.Write(Environment.NewLine);
         }
 
         public void RemoveSale()
@@ -358,7 +362,6 @@ namespace MarketApp
             }
 
             Console.WriteLine("Daxil etdiyiniz tarixlere uygun gelen satishlar bunlardir:");
-            Console.Write(Environment.NewLine);
 
             foreach (Sale item in sales.FindAll(x => x.Date >= date1 && x.Date <= date2))
                 Console.WriteLine(item);
@@ -423,7 +426,6 @@ namespace MarketApp
             }
 
             Console.WriteLine("Daxil etdiyiniz qiymet araligina uygun gelen satishlar ashagidakilardir:");
-            Console.Write(Environment.NewLine);
 
             foreach (Sale item in sales.FindAll(x => x.TotalAmount >= minPrice && x.TotalAmount <= maxPrice))
                 Console.WriteLine(item);
@@ -465,7 +467,6 @@ namespace MarketApp
             }
 
             Console.WriteLine("Daxil etdiyiniz tarixe uygun gelen satish(lar) ashagidakilardir:");
-            Console.Write(Environment.NewLine);
 
             foreach (Sale item in sales.FindAll(x => x.Date == date1))
                 Console.WriteLine(item);
@@ -519,7 +520,7 @@ namespace MarketApp
             Console.WriteLine("Daxil etdiyiniz nomreye uygun gelen satishin detallari bunlardir:");
             Console.Write(Environment.NewLine);
             Console.WriteLine(sales.Find(CheckID));
-
+            Console.WriteLine("Terkibindeki mehsullarin siyahisi:");
             foreach (SaleItem item in sales.Find(CheckID).list)
                 Console.WriteLine(item);
 

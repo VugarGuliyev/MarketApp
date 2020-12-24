@@ -23,7 +23,7 @@ namespace MarketApp
 
         public override string ToString()
         {
-            return $"Mehsul: {Product} | Say: {Count}";
+            return $"Kod: {Product.Code} | Mehsul: {Product.Name} | Say: {Count}";
         }
     }
 }

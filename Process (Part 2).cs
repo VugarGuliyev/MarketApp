@@ -138,6 +138,7 @@ namespace MarketApp
             }
 
             Console.WriteLine("Emeliyyati dayandirmaq uchun mehsul koduna # daxil ede bilersiniz.");
+            Console.Write(Environment.NewLine);
             Console.WriteLine("Duzelish etmek istediyiniz mehsulun kodunu daxil edin.");
 
             // Mehsulun koduna gore axtarish edilir. Koda uygun mehsul movcud deyilse
@@ -176,6 +177,12 @@ namespace MarketApp
                 if (newCodeInput.ToString() == "0")
                 {
                     Console.WriteLine("Mehsul kodu 0 ola bilmez. Yeniden cehd edin.");
+                    continue;
+                }
+
+                if (newCodeInput.ToString() == oldCodeInput.ToString())
+                {
+                    Console.WriteLine("Mehsulun kohne kodunu daxil etdiniz. Bashqa kod daxil edin");
                     continue;
                 }
 

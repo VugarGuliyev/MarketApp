@@ -12,7 +12,6 @@ namespace MarketApp
         public readonly int ID;
         public DateTime Date { get; set; }
         public double TotalAmount { get; set; }
-        public int TotalProduct { get; set; }
 
         public List<SaleItem> list = new List<SaleItem>();
 
@@ -24,17 +23,7 @@ namespace MarketApp
 
         public override string ToString()
         {
-            return $"Nomre: {ID} | Tarix: {Date.ToString("MM/dd/yyyy")} | Cheshid sayi: {list.Count} | Toplam mehsul sayi: {SumProducts()} | Mebleg: {TotalAmount}";
-        }
-        
-        // SumProducts metodu umumi mehsul siyahisini ekrana yazdirmaq uchun yaradilib.
-
-        public int SumProducts()
-        {
-            for (int i = 0; i < list.Count; i++)
-                TotalProduct += list[i].Count;
-
-            return TotalProduct;
+            return $"Nomre: {ID} | Tarix: {Date.ToString("MM/dd/yyyy")} | Cheshid sayi: {list.Count} | Mebleg: {TotalAmount} AZN";
         }
     }
 }
