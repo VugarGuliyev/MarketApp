@@ -12,6 +12,13 @@ namespace MarketApp
     {
         public void AddNewSale()
         {
+            if (products.Count == 0)
+            {
+                Console.WriteLine("Mehsul siyahisi boshdur.");
+                Console.Write(Environment.NewLine);
+                return;
+            }
+
             sales.Add(new Sale());
             Console.WriteLine("Emeliyyati dayandirmaq uchun satish tarixine # daxil ede bilersiniz.");
             Console.Write(Environment.NewLine);
