@@ -153,6 +153,9 @@ namespace MarketApp
                         }
                         bool2 = false;
                         break;
+                    case "3":
+                        bool1 = true;
+                        break;
                     default:
                         Console.WriteLine("Duzgun sechim edin.");
                         Console.Write(Environment.NewLine);
