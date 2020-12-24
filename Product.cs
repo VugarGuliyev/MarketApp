@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MarketApp
 {
-    // Mehsul kateqoriyalari.
+    // Mehsul kateqoriyalari (Enum)
     public enum Category { Shirniyyat = 1, Et_Mehsullari, Sud_Mehsullari, Meishet_Avadanligi, Ichki, Meyve_Terevez };
     
     class Product

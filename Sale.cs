@@ -12,6 +12,7 @@ namespace MarketApp
         public readonly int ID;
         public DateTime Date { get; set; }
         public double TotalAmount { get; set; }
+
         List<SaleItem> saleItems = new List<SaleItem>();
 
         public Sale()

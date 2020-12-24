@@ -8,16 +8,22 @@ namespace MarketApp
 {
     // Butun proses bu classdan instance alinaraq class-daki metodlarla idare olunub.
     // Satishlar uchun yaradilan siyahi ve butun mehsullarin siyahisi da bu class-in ichindedir.
-    // Yeni satishlar ve mehsullar hemin siyahilara elave olunur.
-    // Class partial olaraq 3 hisseye bolunub. Bu hisse satish ve mehsul siyahilari,
-    // metodlarda istifade etmek uchun yaradilan deyishenler ve Predictable type-a uygun metodlari ehtiva edir.
+    // Yeni satishlar ve mehsullar hemin siyahilara elave olunur. Class partial olaraq 3 hisseye
+    // bolunub. Bu hisse satish ve mehsul siyahilari, metodlarda istifade etmek uchun
+    // yaradilan deyishenler ve ortaq istifade uchun yaradilan metodlari ehtiva edir.
 
     partial class Process : IMarketable
     {
+        #region Satish ve mehsul siyahilairi
+
         // Satish ve mehsul siyahilari
 
         List<Sale> sales = new List<Sale>();
         List<Product> products = new List<Product>();
+
+        #endregion
+
+        #region StringBuilder-ler ve diger deyishenler
 
         // Ashagidaki StringBuilder-lar ve diger deyishenler user-in mehsul
         // detallari uchun daxil edeceyi input-lari yoxlayib duzgun formada
@@ -37,8 +43,12 @@ namespace MarketApp
         double minPrice;
         double maxPrice;
 
-        // Ashagidaki metodlar mehsul ve satish axtarish metodlarinda Predictable type
-        // callback metodlar kimi istifade olunub.
+        #endregion
+
+        #region Metodlar
+
+        // FindProduct ve AmendProduct metodlari mehsul ve satish axtarish metodlarinda
+        // Predictable type callback metodlar kimi istifade olunub.
 
         public bool FindProduct(Product product)
         {
@@ -50,7 +60,41 @@ namespace MarketApp
             return product.Code == newCodeInput.ToString();
         }
 
-        // Ashagidaki metodlar benzer if statement ve switch case-lerde istifade etmek uchun yaradilib.
+        // NewInput metodu StringBuilder-leri temizleyib onlara
+        // yeni input deyerleri menimsetmek uchun istifade olunub.
+
+        public void NewInput(StringBuilder sb)
+        {
+            sb.Clear();
+            sb.Append(Console.ReadLine());
+        }
+
+        // ShowCategoryList ve ShowProductList metodlari siyahilari
+        // elde etmek uchun yaradilib ki, benzer yerlerde kod tekrari olmasin.
+
+        public void ShowCategoryList()
+        {
+            foreach (var item in Enum.GetValues(typeof(Category)))
+                Console.WriteLine($"{(int)item} - {item}");
+        }
+
+        public void ShowProductList()
+        {
+            foreach (Product item in products)
+                Console.WriteLine(item);
+        }
+
+        // PriceCompare metodu user-in daxil etdiyi minimum ve maksimum qiymetlerin
+        // duzgunluyunu yoxlamaq ve onlari muqayise etmek uchun yaradilib.
+
+        public bool PriceCompare()
+        {
+            return !double.TryParse(minPriceInput.ToString(), out minPrice) || minPrice < 0 ||
+                    !double.TryParse(maxPriceInput.ToString(), out maxPrice) || maxPrice < 0 ||
+                    minPrice > maxPrice;
+        }
+
+        // Ashagidaki metodlar ise benzer if statement ve switch case-lerde istifade etmek uchun yaradilib.
 
         public bool InputCheck(string item)
         {
@@ -71,6 +115,9 @@ namespace MarketApp
         {
             switch (item)
             {
+                case "#":
+                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    return;
                 case "1":
                     products.Find(method).Category = Category.Shirniyyat;
                     category = true;
@@ -100,5 +147,6 @@ namespace MarketApp
                     break;
             }
         }
+        #endregion
     }
 }

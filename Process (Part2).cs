@@ -13,8 +13,8 @@ namespace MarketApp
         public void AddNewProduct()
         {
             products.Add(new Product());
-            Console.WriteLine("Emeliyyati dayandirmaq uchun detallarin her hansi birine # daxil ede bilersiniz.");
-            Console.WriteLine(Environment.NewLine + "Yeni mehsulun detallarini qeyd edin.");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine(Environment.NewLine + "Yeni mehsulun detallarini daxil edin.");
 
             // Ashagidaki while loop-lar mehsul detallarinin daxil edilmesi uchun istifade olunub.
             // Melumatlar duzgun yazilmayanda bildirish edilir ve duzgun daxil edilmesi teleb olunur.
@@ -23,9 +23,7 @@ namespace MarketApp
             while (true)
             {
                 Console.Write("Kod: ");
-
-                oldCodeInput.Clear();
-                oldCodeInput.Append(Console.ReadLine());
+                NewInput(oldCodeInput);
 
                 if (oldCodeInput.ToString() == "#")
                 {
@@ -58,9 +56,7 @@ namespace MarketApp
             while (true)
             {
                 Console.Write("Ad: ");
-
-                input.Clear();
-                input.Append(Console.ReadLine());
+                NewInput(input);
 
                 if (input.ToString() == "#")
                 {
@@ -81,9 +77,7 @@ namespace MarketApp
             while (true)
             {
                 Console.Write("Qiymet (AZN): ");
-
-                input.Clear();
-                input.Append(Console.ReadLine());
+                NewInput(input);
 
                 if (input.ToString() == "#")
                 {
@@ -104,9 +98,7 @@ namespace MarketApp
             while (true)
             {
                 Console.Write("Say: ");
-
-                input.Clear();
-                input.Append(Console.ReadLine());
+                NewInput(input);
 
                 if (input.ToString() == "#")
                 {
@@ -121,21 +113,15 @@ namespace MarketApp
                 }
 
                 products.Find(FindProduct).Count = count;
-                Console.WriteLine("Mehsul uchun ashagidaki kateqoriyalardan birini sechin.");
-
-                foreach (var item in Enum.GetValues(typeof(Category)))
-                    Console.WriteLine($"{(int)item} - {item}");
-
+                Console.WriteLine(Environment.NewLine + "Mehsul uchun ashagidaki kateqoriyalardan birini sechin.");
+                ShowCategoryList();
                 break;
             }
 
             while (!category)
             {
                 Console.Write("Kateqoriya indeksi: ");
-
-                input.Clear();
-                input.Append(Console.ReadLine());
-
+                NewInput(input);
                 CategoryCheck(input.ToString(), FindProduct);
             }
 
@@ -146,18 +132,24 @@ namespace MarketApp
 
         public void ChangeProductDetails()
         {
-            Console.WriteLine("Emeliyyati dayandirmaq uchun detallarin her hansi birine # daxil ede bilersiniz.");
+            // Evvela mehsul siyahisinin bosh olub olmadigi yoxlanilir.
+
+            if (products.Count == 0)
+            {
+                Console.WriteLine("Mehsul siyahisi boshdur.");
+                return;
+            }
+
+            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
             Console.WriteLine(Environment.NewLine + "Duzelish etmek istediyiniz mehsulun kodunu daxil edin.");
 
-            // Mehsulun koduna gore axtarish edilir. Koda uygun mehsul movcud deyilse sistemden chixilir.
-            // Koda uygun mehsul movcuddursa deyishiklikler edilir.
+            // Mehsulun koduna gore axtarish edilir. Koda uygun mehsul movcud deyilse
+            // sistemden chixilir. Koda uygun mehsul movcuddursa deyishiklikler edilir.
 
             while (true)
             {
                 Console.Write("Kod: ");
-
-                oldCodeInput.Clear();
-                oldCodeInput.Append(Console.ReadLine());
+                NewInput(oldCodeInput);
 
                 if (oldCodeInput.ToString() == "#")
                 {
@@ -174,15 +166,13 @@ namespace MarketApp
                 break;
             }
 
-            // Kohne kodla tapilan mehsula yeni kod menimsedilir.
-            // Mehsul kodu deyishdirildikden sonra yeni detallar yeni kodla tapilan mehsula menimsedilir.
+            // Kohne kodla tapilan mehsula yeni kod menimsedilir. Mehsul kodu
+            // deyishdirildikden sonra yeni detallar yeni kodla tapilan mehsula menimsedilir.
 
             while (true)
             {
                 Console.Write("Mehsulun yeni kodu: ");
-
-                newCodeInput.Clear();
-                newCodeInput.Append(Console.ReadLine());
+                NewInput(newCodeInput);
 
                 if (newCodeInput.ToString() == "#")
                 {
@@ -215,9 +205,7 @@ namespace MarketApp
             while (true)
             {
                 Console.Write("Mehsulun yeni adi: ");
-
-                input.Clear();
-                input.Append(Console.ReadLine());
+                NewInput(input);
 
                 if (input.ToString() == "#")
                 {
@@ -238,9 +226,7 @@ namespace MarketApp
             while (true)
             {
                 Console.Write("Mehsulun yeni qiymeti (AZN): ");
-
-                input.Clear();
-                input.Append(Console.ReadLine());
+                NewInput(input);
 
                 if (input.ToString() == "#")
                 {
@@ -261,9 +247,7 @@ namespace MarketApp
             while (true)
             {
                 Console.Write("Mehsulun yeni sayi: ");
-
-                input.Clear();
-                input.Append(Console.ReadLine());
+                NewInput(input);
 
                 if (input.ToString() == "#")
                 {
@@ -278,21 +262,15 @@ namespace MarketApp
                 }
 
                 products.Find(AmendProduct).Count = count;
-                Console.WriteLine("Mehsul uchun yeni kateqoriya sechin.");
-
-                foreach (var item in Enum.GetValues(typeof(Category)))
-                    Console.WriteLine($"{(int)item} - {item}");
-
+                Console.WriteLine(Environment.NewLine + "Mehsul uchun yeni kateqoriya sechin.");
+                ShowCategoryList();
                 break;
             }
 
             while (!category)
             {
                 Console.Write("Kateqoriya indeksi: ");
-
-                input.Clear();
-                input.Append(Console.ReadLine());
-
+                NewInput(input);
                 CategoryCheck(input.ToString(), AmendProduct);
             }
 
@@ -303,206 +281,253 @@ namespace MarketApp
 
         public void RemoveProduct()
         {
-            Console.Write("Silmek istediyiniz mehsulun kodunu daxil edin: ");
-
-            if (String.IsNullOrEmpty(oldCodeInput.ToString()))
-                oldCodeInput.Append(Console.ReadLine());
-            else
-                oldCodeInput.Replace(oldCodeInput.ToString(), Console.ReadLine());
-
-            if (!products.Exists(FindProduct))
-            {
-                Console.WriteLine("Bu koda uygun mehsul tapilmadi.");
-                return;
-            }
-
-            // Kodlar unikal oldugu uchun ashagidaki metod koda uygun tapilan yegane mehsulu silir.
-
-            products.Remove(products.Find(FindProduct));
-            Console.WriteLine("Mehsul silindi.");
-        }
-
-        public void ShowAllProducts()
-        {
-            // Evvela mehsul siyahisinin bosh olub olmadigi yoxlanilir.
-
-            if(products.Count == 0)
+            if (products.Count == 0)
             {
                 Console.WriteLine("Mehsul siyahisi boshdur.");
                 return;
             }
 
-            Console.WriteLine("Mehsul siyahisi");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine(Environment.NewLine + "Silmek istediyiniz mehsulun kodunu daxil edin.");
+            
+            while (true)
+            {
+                Console.Write("Kod: ");
+                NewInput(oldCodeInput);
 
-            foreach (Product item in products)
-                Console.WriteLine(item);
+                if (oldCodeInput.ToString() == "#")
+                {
+                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    return;
+                }
+
+                if (!products.Exists(FindProduct))
+                {
+                    Console.WriteLine("Bu koda uygun mehsul tapilmadi. Bashqa kod daxil edin.");
+                    continue;
+                }
+
+                // Kodlar unikal oldugu uchun ashagidaki metod koda uygun tapilan yegane mehsulu silir.
+
+                products.Remove(products.Find(FindProduct));
+                Console.WriteLine(Environment.NewLine + "Mehsul silindi.");
+                return;
+            }
+        }
+
+        public void ShowAllProducts()
+        {
+            if (products.Count == 0)
+            {
+                Console.WriteLine("Mehsul siyahisi boshdur.");
+                return;
+            }
+
+            Console.WriteLine("Umumi mehsul siyahisi:" + Environment.NewLine);
+            ShowProductList();
         }
 
         public void ShowCategoryBasedProducts()
         {
-            Console.WriteLine("Kateqoriyaya uygun mehsullari gormek uchun indeks daxil edin.");
+            if (products.Count == 0)
+            {
+                Console.WriteLine("Mehsul siyahisi boshdur.");
+                return;
+            }
 
-            foreach (var item in Enum.GetValues(typeof(Category)))
-                Console.WriteLine($"{(int)item} - {item}");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine(Environment.NewLine + "Kateqoriya indeksini daxil edin." + Environment.NewLine);
+            ShowCategoryList();
 
-            while (!category)
+            while (true)
             {
                 Console.Write("Kateqoriya indeksi: ");
-
-                if (String.IsNullOrEmpty(input.ToString()))
-                    input.Append(Console.ReadLine());
-                else
-                    input.Replace(input.ToString(), Console.ReadLine());
+                NewInput(input);
 
                 switch (input.ToString())
                 {
+                    case "#":
+                        Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                        return;
                     case "1":
                         // Ashagidaki yoxlanish muvafiq kateqoriyaya uygun mehsullarin movcud
-                        // olub olmamasini yoxlamaq uchundur. Mehsul tapilmasa sistemden chixilir.
+                        // olub olmamasini yoxlamaq uchundur. Mehsul tapilmasa bildirish edilir.
 
-                        if (products.Find(product => product.Category == Category.Shirniyyat) == null)
+                        if (products.Find(x => x.Category == Category.Shirniyyat) == null)
                         {
-                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi.");
-                            return;
+                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi. Bashqa indeks daxil edin.");
+                            break;
                         }
 
-                        foreach (Product item in products.FindAll(product => product.Category == Category.Shirniyyat))
+                        Console.WriteLine(Environment.NewLine + "Shirniyyat kateqoriyasi:");
+
+                        foreach (Product item in products.FindAll(x => x.Category == Category.Shirniyyat))
                             Console.WriteLine(item);
 
-                        category = true;
-                        break;
-                    case "2":
-                        if (products.Find(product => product.Category == Category.Et_Mehsullari) == null)
-                        {
-                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi.");
-                            return;
-                        }
-
-                        foreach (Product item in products.FindAll(product => product.Category == Category.Et_Mehsullari))
-                            Console.WriteLine(item);
-
-                        category = true;
-                        break;
-                    case "3":
-                        if (products.Find(product => product.Category == Category.Sud_Mehsullari) == null)
-                        {
-                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi.");
-                            return;
-                        }
-
-                        foreach (Product item in products.FindAll(product => product.Category == Category.Sud_Mehsullari))
-                            Console.WriteLine(item);
-
-                        category = true;
-                        break;
-                    case "4":
-                        if (products.Find(product => product.Category == Category.Meishet_Avadanligi) == null)
-                        {
-                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi.");
-                            return;
-                        }
-
-                        foreach (Product item in products.FindAll(product => product.Category == Category.Meishet_Avadanligi))
-                            Console.WriteLine(item);
-
-                        category = true;
-                        break;
-                    case "5":
-                        if (products.Find(product => product.Category == Category.Ichki) == null)
-                        {
-                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi.");
-                            return;
-                        }
-
-                        foreach (Product item in products.FindAll(product => product.Category == Category.Ichki))
-                            Console.WriteLine(item);
-
-                        category = true;
-                        break;
-                    case "6":
-                        if (products.Find(product => product.Category == Category.Meyve_Terevez) == null)
-                        {
-                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi.");
-                            return;
-                        }
-
-                        foreach (Product item in products.FindAll(product => product.Category == Category.Meyve_Terevez))
-                            Console.WriteLine(item);
-
-                        category = true;
-                        break;
-                    default:
-                        Console.WriteLine("Duzgun kateqoriya indeksi daxil edin!");
-                        break;
-                }
-            }
-
-            category = false;
-        }
-
-        public void ShowNameBasedProducts()
-        {
-            while (true)
-            {
-                Console.Write("Minimum qiymet: ");
-
-                if (String.IsNullOrEmpty(minPriceInput.ToString()))
-                    minPriceInput.Append(Console.ReadLine());
-                else
-                    minPriceInput.Replace(minPriceInput.ToString(), Console.ReadLine());
-
-                Console.Write("Maksimum qiymet: ");
-
-                if (String.IsNullOrEmpty(maxPriceInput.ToString()))
-                    maxPriceInput.Append(Console.ReadLine());
-                else
-                    maxPriceInput.Replace(maxPriceInput.ToString(), Console.ReadLine());
-
-                // Ashagidaki yoxlanish daxil edilen reqemler duzgun olub olmadigini,
-                // ve minimum qiymetin maksimum qiymetden kichik olub olmadigini yoxlamaq uchundur.
-
-                if (double.TryParse(minPriceInput.ToString(), out minPrice) && minPrice > 0 &&
-                    double.TryParse(maxPriceInput.ToString(), out maxPrice) && maxPrice > 0 &&
-                    minPrice < maxPrice)
-                {
-                    // Ashagidaki yoxlanish duzgun qiymetler daxil edildikde hemin araliga
-                    // uygun mehsullarin movcud olub olmadigini yoxlamaq uchundur.
-
-                    if (products.Find(product => product.Price >= minPrice && product.Price <= maxPrice) == null)
-                    {
-                        Console.WriteLine("Bu qiymet araliginda mehsul yoxdur.");
                         return;
-                    }
+                    case "2":
+                        if (products.Find(x => x.Category == Category.Et_Mehsullari) == null)
+                        {
+                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi. Bashqa indeks daxil edin.");
+                            break;
+                        }
 
-                    foreach (Product item in products.FindAll(product => product.Price >= minPrice && product.Price <= maxPrice))
-                        Console.WriteLine(item);
+                        Console.WriteLine(Environment.NewLine + "Et_Mehsullari kateqoriyasi:");
 
-                    return;
+                        foreach (Product item in products.FindAll(x => x.Category == Category.Et_Mehsullari))
+                            Console.WriteLine(item);
+
+                        return;
+                    case "3":
+                        if (products.Find(x => x.Category == Category.Sud_Mehsullari) == null)
+                        {
+                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi. Bashqa indeks daxil edin.");
+                            break;
+                        }
+
+                        Console.WriteLine(Environment.NewLine + "Sud_Mehsullari kateqoriyasi:");
+
+                        foreach (Product item in products.FindAll(x => x.Category == Category.Sud_Mehsullari))
+                            Console.WriteLine(item);
+
+                        return;
+                    case "4":
+                        if (products.Find(x => x.Category == Category.Meishet_Avadanligi) == null)
+                        {
+                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi. Bashqa indeks daxil edin.");
+                            break;
+                        }
+
+                        Console.WriteLine(Environment.NewLine + "Meishet_Avadanligi kateqoriyasi:");
+
+                        foreach (Product item in products.FindAll(x => x.Category == Category.Meishet_Avadanligi))
+                            Console.WriteLine(item);
+
+                        return;
+                    case "5":
+                        if (products.Find(x => x.Category == Category.Ichki) == null)
+                        {
+                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi. Bashqa indeks daxil edin.");
+                            break;
+                        }
+
+                        Console.WriteLine(Environment.NewLine + "Ichki kateqoriyasi:");
+
+                        foreach (Product item in products.FindAll(x => x.Category == Category.Ichki))
+                            Console.WriteLine(item);
+
+                        return;
+                    case "6":
+                        if (products.Find(x => x.Category == Category.Meyve_Terevez) == null)
+                        {
+                            Console.WriteLine("Bu kateqoriyaya uygun mehsul tapilmadi. Bashqa indeks daxil edin.");
+                            break;
+                        }
+
+                        Console.WriteLine(Environment.NewLine + "Meyve_Terevez kateqoriyasi:");
+
+                        foreach (Product item in products.FindAll(x => x.Category == Category.Meyve_Terevez))
+                            Console.WriteLine(item);
+
+                        return;
+                    default:
+                        Console.WriteLine("Duzgun kateqoriya indeksi daxil edin.");
+                        break;
                 }
-
-                Console.WriteLine("Duzgun qiymet araligi daxil edin!");
             }
         }
 
         public void ShowPriceBasedProducts()
         {
-            Console.Write("Mehsul adini daxil edin: ");
-
-            if (String.IsNullOrEmpty(input.ToString()))
-                input.Append(Console.ReadLine());
-            else
-                input.Replace(input.ToString(), Console.ReadLine());
-
-            if (products.Find(product => product.Name.ToLower() == input.ToString().ToLower()) == null)
+            if (products.Count == 0)
             {
-                Console.WriteLine("Bu ada uygun mehsul tapilmadi.");
+                Console.WriteLine("Mehsul siyahisi boshdur.");
                 return;
             }
 
-            Console.WriteLine("Daxil etdiyiniz ada uygun gelen mehsullar ashagidakilardir");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine(Environment.NewLine + "Qiymet araligini daxil edin.");
 
-            foreach (Product item in products.FindAll(product => product.Name.ToLower() == input.ToString().ToLower()))
-                Console.WriteLine(item);
+            while (true)
+            {
+                Console.Write("Minimum qiymet: ");
+                NewInput(minPriceInput);
+
+                if (minPriceInput.ToString() == "#")
+                {
+                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    return;
+                }
+
+                Console.Write("Maksimum qiymet: ");
+                NewInput(maxPriceInput);
+
+                if (maxPriceInput.ToString() == "#")
+                {
+                    Console.WriteLine(Environment.NewLine + "Emeliyyat dayandirildi.");
+                    return;
+                }
+
+                // Ashagidaki yoxlanish duzgun qiymetler daxil edilib edilmediyini yoxlamaq uchundur.
+
+                if (PriceCompare())
+                {
+                    Console.WriteLine("Duzgun qiymet araligi daxil edin.");
+                    continue;
+                }
+
+                // Duzgun qiymet daxil edilibse ve o araliga uygun mehsul movcud deyilse bildirish edilir.
+
+                if (products.Find(x => x.Price >= minPrice && x.Price <= maxPrice) == null)
+                {
+                    Console.WriteLine("Bu qiymet araliginda mehsul yoxdur. Yeniden cehd edin.");
+                    continue;
+                }
+
+                Console.WriteLine(Environment.NewLine + "Daxil etdiyiniz qiymet araligina uygun mehsullar:");
+
+                foreach (Product item in products.FindAll(x => x.Price >= minPrice && x.Price <= maxPrice))
+                    Console.WriteLine(item);
+
+                return;
+            }       
+        }
+
+        public void ShowNameBasedProducts()
+        {
+            if (products.Count == 0)
+            {
+                Console.WriteLine("Mehsul siyahisi boshdur.");
+                return;
+            }
+
+            Console.WriteLine("Emeliyyati dayandirmaq uchun birbasha # daxil ede bilersiniz.");
+            Console.WriteLine(Environment.NewLine + "Mehsulun adini daxil edin.");
+
+            while (true)
+            {
+                Console.Write("Ad: ");
+                NewInput(input);
+
+                if (InputCheck(input.ToString()))
+                {
+                    Console.WriteLine("Duzgun ad daxil edin.");
+                    continue;
+                }
+
+                if (products.Find(x => x.Name.ToLower() == input.ToString().ToLower()) == null)
+                {
+                    Console.WriteLine("Bu ada uygun mehsul tapilmadi. Yeniden cehd edin.");
+                    continue;
+                }
+
+                Console.WriteLine(Environment.NewLine + "Daxil etdiyiniz ada uygun gelen mehsullar ashagidakilardir:");
+
+                foreach (Product item in products.FindAll(x => x.Name.ToLower() == input.ToString().ToLower()))
+                    Console.WriteLine(item);
+
+                return;
+            }
         }
     }
 }
