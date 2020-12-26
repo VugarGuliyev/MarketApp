@@ -98,7 +98,7 @@ namespace MarketApp
                     continue;
                 }
 
-                if (sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)) != null)
+                if (sales.Find(CheckID).list.Find(FindItem) != null)
                 {
                     Console.Write(Environment.NewLine);
                     Console.WriteLine("Bu mehsuldan artiq elave etmisiniz. Mehsul miqdarini berpa etmek uchun + daxil edin");
@@ -106,10 +106,13 @@ namespace MarketApp
                     Console.Write("Sechim: ");
                     NewInput(input);
 
-                    if (input.ToString() != "+")
-                        continue;
+                    if (input.ToString() == "+")
+                    {
+                        extra = sales.Find(CheckID).list.Find(FindItem).Count;
+                        sales.Find(CheckID).list.Remove(sales.Find(CheckID).list.Find(FindItem));
+                    }
                     else
-                        sales.Find(CheckID).list.Remove(sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)));
+                        continue;
                 }
 
                 Console.Write(Environment.NewLine);
@@ -122,7 +125,7 @@ namespace MarketApp
 
                     // Her mehsuldan minimum 1 eded elave edilmelidir.
 
-                    if (CountCheck(input.ToString()))
+                    if (CountCheck())
                     {
                         Console.WriteLine("Musbet tam eded daxil edin.");
                         continue;
@@ -140,8 +143,8 @@ namespace MarketApp
                     // Satishin meblegi artirilir. (mehsulun kodu ile miqdarin hasili)
                     // Daha sonra ise mehsul siyahisindaki hemin mehsuldan istenilen miqdar chixilir.
 
-                    sales.Find(CheckID).list.Add(new SaleItem(products.Find(FindProduct), count));
-                    sales.Find(CheckID).TotalAmount += sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)).Product.Price * count;
+                    sales.Find(CheckID).list.Add(new SaleItem(products.Find(FindProduct), count + extra));
+                    sales.Find(CheckID).TotalAmount += sales.Find(CheckID).list.Find(FindItem).Product.Price * (count + extra);
                     products.Find(FindProduct).Count -= count;
                     Console.Write(Environment.NewLine);
                     Console.WriteLine("Mehsul elave edildi. Novbeti mehsul kodunu daxil edin.");
@@ -159,10 +162,10 @@ namespace MarketApp
                 return;
             }
 
-            Console.WriteLine("Emeliyyati dayandirmaq uchun mehsul nomresine # daxil ede bilersiniz.");
+            Console.WriteLine("Emeliyyati dayandirmaq uchun satish nomresine # daxil ede bilersiniz.");
             Console.Write(Environment.NewLine);
             ShowAllSales();
-            Console.WriteLine("Qaytarmaq istediyiniz mehsulun yer aldigi satishin nomresini daxil edin.");
+            Console.WriteLine("Satish nomresini daxil edin.");
 
             while (true)
             {
@@ -177,7 +180,7 @@ namespace MarketApp
                     return;
                 }
 
-                if (input.ToString().Contains('.') || !int.TryParse(input.ToString(), out saleID) || saleID <= 0)
+                if (isIDValid())
                 {
                     Console.WriteLine("Nomre musbet tam eded olmalidir.");
                     continue;
@@ -209,7 +212,7 @@ namespace MarketApp
                 Console.Write("Kod: ");
                 NewInput(oldCodeInput);
 
-                if (sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)) == null)
+                if (sales.Find(CheckID).list.Find(FindItem) == null)
                 {
                     Console.Write(Environment.NewLine);
                     Console.WriteLine("Satishda bu koda uygun mehsul yoxdur. Bashqa kod daxil edin.");
@@ -227,13 +230,13 @@ namespace MarketApp
                 Console.Write("Miqdar: ");
                 NewInput(input);
 
-                if (CountCheck(input.ToString()))
+                if (CountCheck())
                 {
                     Console.WriteLine("Musbet tam eded daxil edin.");
                     continue;
                 }
 
-                if (sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)).Count < count)
+                if (sales.Find(CheckID).list.Find(FindItem).Count < count)
                 {
                     Console.WriteLine("Satishda bu qeder mehsul movcud deyil. Bashqa miqdar daxil edin.");
                     continue;
@@ -242,17 +245,25 @@ namespace MarketApp
                 break;
             }
 
-            // Qaytarilan miqdar satish item-inin sayindan chixilir ve mehsul siyahisina elave edilir.
+            // Qaytarilan miqdar satish item-inin sayindan chixilir ve mehsul siyahisina geri qaytarilir.
 
-            sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)).Count -= count;
-            sales.Find(CheckID).TotalAmount -= sales.Find(CheckID).list.Find(x => x.Product == products.Find(FindProduct)).Product.Price * count;
+            sales.Find(CheckID).list.Find(FindItem).Count -= count;
+            sales.Find(CheckID).TotalAmount -= sales.Find(CheckID).list.Find(FindItem).Product.Price * count;
             products.Find(FindProduct).Count += count;
 
             // Mehsul qaytarildiqdan sonra satish item-inin sayi 0-a dushurse hemin item avtomatik silinir.
 
             sales.Find(CheckID).list.Remove(sales.Find(CheckID).list.Find(x => x.Count == 0));
-
             Console.Clear();
+
+            if (sales.Find(CheckID).TotalAmount == 0)
+            {
+                sales.Remove(sales.Find(CheckID));
+                Console.WriteLine("Umumi mebleg 0-a dushduyu uchun birbasha satishin ozu silindi.");
+                Console.Write(Environment.NewLine);
+                return;
+            }
+
             Console.WriteLine("Mehsul qaytarildi.");
             Console.Write(Environment.NewLine);
             Console.WriteLine("Satishin yeni detallari:");
@@ -286,7 +297,7 @@ namespace MarketApp
                     return;
                 }
 
-                if (input.ToString().Contains('.') || !int.TryParse(input.ToString(), out saleID) || saleID <= 0)
+                if (isIDValid())
                 {
                     Console.WriteLine("Musbet tam eded daxil edin.");
                     continue;
@@ -498,7 +509,7 @@ namespace MarketApp
                     return;
                 }
 
-                if (input.ToString().Contains('.') || !int.TryParse(input.ToString(), out saleID) || saleID <= 0)
+                if (isIDValid())
                 {
                     Console.WriteLine("Nomre musbet tam eded olmalidir.");
                     continue;

@@ -16,8 +16,6 @@ namespace MarketApp
     {
         #region Satish ve mehsul siyahilairi
 
-        // Satish ve mehsul siyahilari
-
         List<Sale> sales = new List<Sale>();
         List<Product> products = new List<Product>();
 
@@ -39,6 +37,7 @@ namespace MarketApp
         double price;
         int count;
         int saleID;
+        int extra;
         bool category = false;
 
         double minPrice;
@@ -54,7 +53,7 @@ namespace MarketApp
 
         #region Metodlar
 
-        // FindProduct, AmendProduct ve CheckID metodlari mehsul ve satish axtarish
+        // FindProduct, AmendProduct, CheckID ve FindItem metodlari mehsul ve satish axtarish
         // metodlarinda Predictable type callback metodlar kimi istifade olunub.
 
         public bool FindProduct(Product product)
@@ -70,6 +69,11 @@ namespace MarketApp
         public bool CheckID(Sale sale)
         {
             return sale.ID == saleID;
+        }
+
+        public bool FindItem(SaleItem item)
+        {
+            return item.Product == products.Find(FindProduct);
         }
 
         // NewInput metodu StringBuilder-leri temizleyib onlara
@@ -113,14 +117,19 @@ namespace MarketApp
             return String.IsNullOrEmpty(item) || String.IsNullOrWhiteSpace(item);
         }
 
-        public bool PriceCheck(string item)
+        public bool PriceCheck()
         {
-            return !double.TryParse(item, out price) || price <= 0;
+            return !double.TryParse(input.ToString(), out price) || price <= 0;
         }
 
-        public bool CountCheck(string str)
+        public bool CountCheck()
         {
-            return str.Contains('.') || !int.TryParse(str, out count) || count <= 0;
+            return input.ToString().Contains('.') || !int.TryParse(input.ToString(), out count) || count <= 0;
+        }
+
+        public bool isIDValid()
+        {
+            return input.ToString().Contains('.') || !int.TryParse(input.ToString(), out saleID) || saleID <= 0;
         }
 
         public void CategoryCheck(string item, Predicate<Product> method)

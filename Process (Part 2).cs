@@ -64,7 +64,7 @@ namespace MarketApp
 
                 if (InputCheck(input.ToString()))
                 {
-                    Console.WriteLine("Duzgun ad daxil edin.");
+                    Console.WriteLine("Mehsul adi bosh buraxila bilmez. Yeniden cehd edin.");
                     continue;
                 }
 
@@ -83,7 +83,7 @@ namespace MarketApp
                 Console.Write("Qiymet (AZN): ");
                 NewInput(input);
 
-                if (PriceCheck(input.ToString()))
+                if (PriceCheck())
                 {
                     Console.WriteLine("Duzgun qiymet daxil edin.");
                     continue;
@@ -98,7 +98,7 @@ namespace MarketApp
                 Console.Write("Say: ");
                 NewInput(input);
 
-                if (CountCheck(input.ToString()))
+                if (CountCheck())
                 {
                     Console.WriteLine("Duzgun say daxil edin.");
                     continue;
@@ -138,6 +138,8 @@ namespace MarketApp
             }
 
             Console.WriteLine("Emeliyyati dayandirmaq uchun mehsul koduna # daxil ede bilersiniz.");
+            Console.Write(Environment.NewLine);
+            ShowAllProducts();
             Console.Write(Environment.NewLine);
             Console.WriteLine("Duzelish etmek istediyiniz mehsulun kodunu daxil edin.");
 
@@ -209,7 +211,7 @@ namespace MarketApp
 
                 if (InputCheck(input.ToString()))
                 {
-                    Console.WriteLine("Duzgun ad daxil edin.");
+                    Console.WriteLine("Mehsul adin bosh buraxila bilmez. Yeniden cehd edin.");
                     continue;
                 }
 
@@ -228,7 +230,7 @@ namespace MarketApp
                 Console.Write("Mehsulun yeni qiymeti (AZN): ");
                 NewInput(input);
 
-                if (PriceCheck(input.ToString()))
+                if (PriceCheck())
                 {
                     Console.WriteLine("Duzgun qiymet daxil edin.");
                     continue;
@@ -243,7 +245,7 @@ namespace MarketApp
                 Console.Write("Mehsulun yeni sayi: ");
                 NewInput(input);
 
-                if (CountCheck(input.ToString()))
+                if (CountCheck())
                 {
                     Console.WriteLine("Duzgun say daxil edin.");
                     continue;
@@ -300,6 +302,12 @@ namespace MarketApp
                 if (!products.Exists(FindProduct))
                 {
                     Console.WriteLine("Bu koda uygun mehsul tapilmadi. Bashqa kod daxil edin.");
+                    continue;
+                }
+
+                if (sales.Exists(s => s.list.Exists(FindItem)))
+                {
+                    Console.WriteLine("Bu mehsul artiq satisha elave olunub. Mehsulu ilk once satishdan silin ve yeniden cehd edin.");
                     continue;
                 }
 
